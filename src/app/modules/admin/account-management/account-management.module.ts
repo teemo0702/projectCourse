@@ -3,6 +3,11 @@ import { CommonModule } from '@angular/common';
 import {AccountManagementComponent} from './account-management.component';
 import {RouterModule} from '@angular/router';
 import {accountManagementRoutes} from './account-management.routing';
+import {MatTableModule} from '@angular/material/table';
+import {MatIconModule} from '@angular/material/icon';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -10,7 +15,12 @@ import {accountManagementRoutes} from './account-management.routing';
   ],
   imports: [
       RouterModule.forChild(accountManagementRoutes),
-      CommonModule
+      CommonModule,
+      MatTableModule,
+      MatIconModule,
+      MatFormFieldModule,
+      MatInputModule,
+      MatButtonModule,
   ]
 })
 export class AccountManagementModule { }

@@ -1,1 +1,76 @@
-<p>account-management works!</p>
+<div class="absolute inset-0 flex flex-col min-w-0 overflow-y-auto" cdkScrollable>
+    <div class="flex flex-col p-6 space-y-6">
+<!--        #1c4366-->
+
+        <!-- Header -->
+        <div class="flex items-center justify-between">
+            <mat-form-field
+                class="fuse-mat-no-subscript w-72"
+                [floatLabel]="'always'"
+            >
+                <mat-icon
+                    matPrefix
+                    class="icon-size-5"
+                    [svgIcon]="'heroicons_solid:search'"
+                ></mat-icon>
+                <input
+                    placeholder="Search"
+                    matInput
+                    #query
+                >
+            </mat-form-field>
+            <button
+                mat-raised-button
+                color="primary"
+                class="h-[40px] w-[40px] sm:w-[154px] flex items-center justify-center rounded-[4px]"
+            >
+                <svg stroke="#F1F5F9" width="24" height="24">
+                    <use xlink:href="#icon_plus"></use>
+                </svg>
+                <span class="pl-[8px] hidden sm:block font-medium text-[#F1F5F9] text-[14px] leading-5">Tạo tài khoản</span>
+            </button>
+        </div>
+
+        <!-- Table Account -->
+        <table mat-table [dataSource]="filteredAccounts" class="mat-elevation-z8">
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef>
+                    <span class="text-lg">No.</span>
+                </th>
+                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="fullname">
+                <th mat-header-cell *matHeaderCellDef>
+                    <span class="text-lg">Full name</span>
+                </th>
+                <td mat-cell *matCellDef="let element"> {{element.fullname}} </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="username">
+                <th mat-header-cell *matHeaderCellDef>
+                    <span class="text-lg">User name</span>
+                </th>
+                <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <!-- No courses -->
+        <ng-template #noAccount>
+            <div class="flex flex-auto flex-col items-center justify-center bg-gray-100 dark:bg-transparent">
+                <mat-icon
+                    class="icon-size-24"
+                    [svgIcon]="'heroicons_outline:document-search'"></mat-icon>
+                <div class="mt-6 text-2xl font-semibold tracking-tight text-secondary">No account found!</div>
+            </div>
+        </ng-template>
+
+    </div>
+</div>

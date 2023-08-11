@@ -18,7 +18,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 id   : 'accountManagement',
                 title: 'Account Management',
                 type : 'basic',
-                icon : 'heroicons_outline:academic-cap',
+                icon : 'heroicons_outline:user-group',
                 link : '/account-management'
             },
             {
