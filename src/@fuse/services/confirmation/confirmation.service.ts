@@ -11,7 +11,7 @@ export class FuseConfirmationService
         title      : 'Confirm action',
         message    : 'Are you sure you want to confirm this action?',
         icon       : {
-            show : true,
+            show : false,
             name : 'heroicons_outline:exclamation',
             color: 'warn'
         },
@@ -19,7 +19,7 @@ export class FuseConfirmationService
             confirm: {
                 show : true,
                 label: 'Confirm',
-                color: 'warn'
+                color: 'primary'
             },
             cancel : {
                 show : true,

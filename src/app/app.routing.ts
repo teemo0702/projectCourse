@@ -10,14 +10,14 @@ import { InitialDataResolver } from 'app/app.resolvers';
 export const appRoutes: Route[] = [
 
     // Redirect empty path to '/dashboards/project'
-    {path: '', pathMatch : 'full', redirectTo: 'dashboards/project'},
+    {path: '', pathMatch : 'full', redirectTo: 'courses'},
 
     // Redirect signed in user to the '/dashboards/project'
     //
     // After the user signs in, the sign in page will redirect the user to the 'signed-in-redirect'
     // path. Below is another redirection for that path to redirect the user to the desired
     // location. This is a small convenience to keep all main routes together here on this file.
-    {path: 'signed-in-redirect', pathMatch : 'full', redirectTo: 'dashboards/project'},
+    {path: 'signed-in-redirect', pathMatch : 'full', redirectTo: 'courses'},
 
     // Auth routes for guests
     {
@@ -200,6 +200,18 @@ export const appRoutes: Route[] = [
                 // Guides
                 {path: 'guides', loadChildren: () => import('app/modules/admin/docs/guides/guides.module').then(m => m.GuidesModule)}
             ]},
+
+            // Course
+            {
+                path: 'courses',
+                loadChildren: () => import('app/modules/admin/courses/courses.module').then(m => m.CoursesModule)
+            },
+
+            // Account Management
+            {
+                path: 'account-management',
+                loadChildren: () => import('app/modules/admin/account-management/account-management.module').then(m => m.AccountManagementModule)
+            },
 
             // 404 & Catch all
             {path: '404-not-found', pathMatch: 'full', loadChildren: () => import('app/modules/admin/pages/error/error-404/error-404.module').then(m => m.Error404Module)},

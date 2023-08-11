@@ -12,6 +12,8 @@ import { mockApiServices } from 'app/mock-api';
 import { LayoutModule } from 'app/layout/layout.module';
 import { AppComponent } from 'app/app.component';
 import { appRoutes } from 'app/app.routing';
+import {CoursesModule} from './modules/admin/courses/courses.module';
+import {AccountManagementModule} from './modules/admin/account-management/account-management.module';
 
 const routerConfig: ExtraOptions = {
     preloadingStrategy       : PreloadAllModules,
@@ -26,6 +28,10 @@ const routerConfig: ExtraOptions = {
         BrowserModule,
         BrowserAnimationsModule,
         RouterModule.forRoot(appRoutes, routerConfig),
+
+        // Custom
+        CoursesModule,
+        AccountManagementModule,
 
         // Fuse, FuseConfig & FuseMockAPI
         FuseModule,
