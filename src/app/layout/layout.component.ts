@@ -8,6 +8,7 @@ import { FusePlatformService } from '@fuse/services/platform';
 import { FUSE_VERSION } from '@fuse/version';
 import { Layout } from 'app/layout/layout.types';
 import { AppConfig } from 'app/core/config/app.config';
+import $ from "jquery";
 
 @Component({
     selector     : 'layout',
@@ -107,6 +108,13 @@ export class LayoutComponent implements OnInit, OnDestroy
 
         // Set the OS name
         this._renderer2.addClass(this._document.body, this._fusePlatformService.osName);
+    }
+
+    /**
+     * After view init
+     */
+    ngAfterViewInit(): void {
+        $('#all-icons').load('/assets/icons/icons.svg', () => {});
     }
 
     /**
