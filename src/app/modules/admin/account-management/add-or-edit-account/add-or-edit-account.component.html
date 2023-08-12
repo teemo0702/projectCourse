@@ -1,0 +1,46 @@
+<div class="p-4">
+    <div class="header pb-4 border-b">
+        <span class="text-[20px] font-bold">Cấp tài khoản</span>
+    </div>
+    <div class="content">
+        <div class="pt-4">
+            <mat-form-field class="fuse-mat-no-subscript w-full">
+                <label for="fullname"></label>
+                <input
+                    id="fullname"
+                    [(ngModel)]="fullname"
+                    [placeholder]="'Họ và tên'"
+                    matInput
+                >
+            </mat-form-field>
+            <mat-form-field class="fuse-mat-no-subscript w-full">
+                <label for="username"></label>
+                <input
+                    id="username"
+                    [(ngModel)]="username"
+                    [placeholder]="'Tên tài khoản'"
+                    matInput
+                >
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="footer mt-4 flex justify-end">
+        <div>
+            <button
+                class="rounded-[4px] py-2 px-4 mr-3 bg-[#F1F5F9]"
+                mat-raised-button
+                (click)="closeDialog()"
+            >
+                <span>Hủy</span>
+            </button>
+            <button
+                class="rounded-[4px] py-2 px-4"
+                mat-raised-button
+                color="primary"
+                (click)="saveAccount()"
+            >
+                <span>Lưu</span>
+            </button>
+        </div>
+    </div>
+</div>

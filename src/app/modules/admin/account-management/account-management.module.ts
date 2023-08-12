@@ -8,19 +8,18 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
+import {SharedModule} from "../../../shared/shared.module";
+import { AddOrEditAccountComponent } from './add-or-edit-account/add-or-edit-account.component';
 
 @NgModule({
   declarations: [
-      AccountManagementComponent
+      AccountManagementComponent,
+      AddOrEditAccountComponent
   ],
   imports: [
       RouterModule.forChild(accountManagementRoutes),
       CommonModule,
-      MatTableModule,
-      MatIconModule,
-      MatFormFieldModule,
-      MatInputModule,
-      MatButtonModule,
+      SharedModule,
   ]
 })
 export class AccountManagementModule { }
