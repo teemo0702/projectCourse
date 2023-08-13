@@ -35,59 +35,59 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 icon : 'heroicons_outline:cloud',
                 link : '/apps/file-manager'
             },
-            {
-                id      : 'pages.authentication',
-                title   : 'Authentication',
-                type    : 'collapsable',
-                icon    : 'heroicons_outline:lock-closed',
-                children: [
-                    {
-                        id      : 'pages.authentication.sign-in',
-                        title   : 'Sign in',
-                        type : 'basic',
-                        link : '/pages/authentication/sign-in/classic'
-                    },
-                    {
-                        id      : 'pages.authentication.sign-up',
-                        title   : 'Sign up',
-                        type : 'basic',
-                        link : '/pages/authentication/sign-up/classic'
-                    },
-                    {
-                        id      : 'pages.authentication.reset-password',
-                        title   : 'Reset password',
-                        type : 'basic',
-                        link : '/pages/authentication/reset-password/classic'
-                    },
-                ]
-            },
-            {
-                id      : 'pages.error',
-                title   : 'Error',
-                type    : 'collapsable',
-                icon    : 'heroicons_outline:exclamation-circle',
-                children: [
-                    {
-                        id   : 'pages.error.404',
-                        title: '404',
-                        type : 'basic',
-                        link : '/pages/error/404'
-                    },
-                    {
-                        id   : 'pages.error.500',
-                        title: '500',
-                        type : 'basic',
-                        link : '/pages/error/500'
-                    }
-                ]
-            },
-            {
-                id   : 'user-interface.confirmation-dialog',
-                title: 'Confirmation Dialog',
-                type : 'basic',
-                icon : 'heroicons_outline:question-mark-circle',
-                link : '/ui/confirmation-dialog'
-            }
+            // {
+            //     id      : 'pages.authentication',
+            //     title   : 'Authentication',
+            //     type    : 'collapsable',
+            //     icon    : 'heroicons_outline:lock-closed',
+            //     children: [
+            //         {
+            //             id      : 'pages.authentication.sign-in',
+            //             title   : 'Sign in',
+            //             type : 'basic',
+            //             link : '/pages/authentication/sign-in/classic'
+            //         },
+            //         {
+            //             id      : 'pages.authentication.sign-up',
+            //             title   : 'Sign up',
+            //             type : 'basic',
+            //             link : '/pages/authentication/sign-up/classic'
+            //         },
+            //         {
+            //             id      : 'pages.authentication.reset-password',
+            //             title   : 'Reset password',
+            //             type : 'basic',
+            //             link : '/pages/authentication/reset-password/classic'
+            //         },
+            //     ]
+            // },
+            // {
+            //     id      : 'pages.error',
+            //     title   : 'Error',
+            //     type    : 'collapsable',
+            //     icon    : 'heroicons_outline:exclamation-circle',
+            //     children: [
+            //         {
+            //             id   : 'pages.error.404',
+            //             title: '404',
+            //             type : 'basic',
+            //             link : '/pages/error/404'
+            //         },
+            //         {
+            //             id   : 'pages.error.500',
+            //             title: '500',
+            //             type : 'basic',
+            //             link : '/pages/error/500'
+            //         }
+            //     ]
+            // },
+            // {
+            //     id   : 'user-interface.confirmation-dialog',
+            //     title: 'Confirmation Dialog',
+            //     type : 'basic',
+            //     icon : 'heroicons_outline:question-mark-circle',
+            //     link : '/ui/confirmation-dialog'
+            // }
         ]
     }
 ];

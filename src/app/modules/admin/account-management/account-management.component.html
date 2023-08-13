@@ -23,14 +23,11 @@
             </mat-form-field>
             <button
                 mat-raised-button
-                color="primary"
-                class="h-[40px] w-[40px] sm:w-[154px] flex items-center justify-center rounded-[4px]"
+                [color]="'primary'"
                 (click)="createOrEditAccount()"
             >
-                <svg stroke="#F1F5F9" width="24" height="24">
-                    <use xlink:href="#icon_plus"></use>
-                </svg>
-                <span class="pl-[8px] hidden sm:block font-medium text-[#F1F5F9] text-[14px] leading-5">Cấp tài khoản</span>
+                <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
+                <span class="ml-2 mr-1">Cấp tài khoản</span>
             </button>
         </div>
 

@@ -29,9 +29,6 @@ const routerConfig: ExtraOptions = {
         BrowserAnimationsModule,
         RouterModule.forRoot(appRoutes, routerConfig),
 
-        // Custom
-        CoursesModule,
-        AccountManagementModule,
 
         // Fuse, FuseConfig & FuseMockAPI
         FuseModule,

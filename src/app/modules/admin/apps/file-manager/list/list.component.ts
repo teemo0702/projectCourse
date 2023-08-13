@@ -46,6 +46,7 @@ export class FileManagerListComponent implements OnInit, OnDestroy
         this._fileManagerService.items$
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe((items: Items) => {
+                console.log(items);
                 this.items = items;
 
                 // Mark for check
