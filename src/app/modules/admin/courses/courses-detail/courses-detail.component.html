@@ -1,1 +1,31 @@
-<p>courses-detail works!</p>
+<div class="absolute inset-0 flex flex-col min-w-0 overflow-y-auto" cdkScrollable>
+    <div class="flex flex-col p-6 space-y-6 w-full">
+        <!-- Header -->
+        <div class="flex">
+            <a class="flex items-center text-primary hover:underline" [routerLink]="['..']">
+                <mat-icon
+                    class="icon-size-5 text-current"
+                    [svgIcon]="'heroicons_solid:arrow-sm-left'"
+                ></mat-icon>
+                <span class="ml-2 font-medium">Back to courses</span>
+            </a>
+
+<!--            <a mat-stroked-button class="text-primary hover:underline" [routerLink]="['..']">-->
+<!--                <span class="inline-flex items-center">-->
+<!--                    <mat-icon-->
+<!--                        class="icon-size-5 text-current"-->
+<!--                        [svgIcon]="'heroicons_solid:arrow-sm-left'"-->
+<!--                    ></mat-icon>-->
+<!--                    <span class="ml-2 font-medium">Back to courses</span>-->
+<!--                </span>-->
+<!--            </a>-->
+        </div>
+
+        <!-- Content -->
+        <div class="bg-card p-4 rounded-md flex flex-col" style="height: calc(100vh - 213px);">
+            <div class="h-full">
+                <iframe src="./assets/images/powerpoint.pdf" width="100%" height="100%"></iframe>
+            </div>
+        </div>
+    </div>
+</div>

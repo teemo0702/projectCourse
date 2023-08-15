@@ -27,3 +27,7 @@
 div#all-icons {
     @apply hidden;
 }
+
+.custom-dialog .mat-dialog-container {
+    @apply w-[360px] sm:w-[600px];
+}

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Injector, OnInit} from '@angular/core';
 import {courses} from "../../../../mock-api/apps/academy/data";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-courses-list',
@@ -9,7 +10,14 @@ import {courses} from "../../../../mock-api/apps/academy/data";
 export class CoursesListComponent implements OnInit {
     filteredCourses: any[] = [];
 
-    constructor() { }
+    fileName: string;
+
+    public dialogService: MatDialog;
+    constructor(
+        injector: Injector,
+    ) {
+        this.dialogService = injector.get(MatDialog);
+    }
 
     ngOnInit(): void {
         this.filteredCourses = courses;
@@ -17,5 +25,33 @@ export class CoursesListComponent implements OnInit {
 
     trackByFn(index: number, item: any): any {
         return item.id || index;
+    }
+
+    navigateSlide() {
+        window.open('https://s4.lifesup.com.vn/hrm/file-upload/avatar/6f8e8815-5bde-449a-9d22-5ba4f63c0385.pptx');
+    }
+
+    openDialogImport(template) {
+        this.fileName = null;
+        this.dialogService.open(template, {panelClass: 'custom-dialog'});
+    }
+
+    uploadFile(event: any) {
+        const reader = new FileReader();
+        const file = event.target.files[0];
+        if (event.target.files && event.target.files[0]) {
+            reader.readAsDataURL(file);
+            reader.onload = () => {
+                this.fileName = file.name;
+            };
+        }
+    }
+
+    removeFile() {
+        this.fileName = null;
+    }
+
+    closeDialog(): void {
+        this.dialogService.closeAll();
     }
 }
