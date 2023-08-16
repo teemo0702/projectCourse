@@ -24,7 +24,12 @@
         <!-- Content -->
         <div class="bg-card p-4 rounded-md flex flex-col" style="height: calc(100vh - 213px);">
             <div class="h-full">
-                <iframe src="./assets/images/powerpoint.pdf" width="100%" height="100%"></iframe>
+<!--                <iframe src="./assets/images/powerpoint.pdf" width="100%" height="100%"></iframe>-->
+                <ngx-doc-viewer
+                    [url]="doc"
+                    viewer="google"
+                    style="width:100%;height:100%;"
+                ></ngx-doc-viewer>
             </div>
         </div>
     </div>
