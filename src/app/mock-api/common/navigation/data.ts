@@ -21,20 +21,20 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 icon : 'heroicons_outline:user-group',
                 link : '/account-management'
             },
-            {
-                id   : 'apps.academy',
-                title: 'Academy',
-                type : 'basic',
-                icon : 'heroicons_outline:academic-cap',
-                link : '/apps/academy'
-            },
-            {
-                id   : 'apps.file-manager',
-                title: 'File Manager',
-                type : 'basic',
-                icon : 'heroicons_outline:cloud',
-                link : '/apps/file-manager'
-            },
+            // {
+            //     id   : 'apps.academy',
+            //     title: 'Academy',
+            //     type : 'basic',
+            //     icon : 'heroicons_outline:academic-cap',
+            //     link : '/apps/academy'
+            // },
+            // {
+            //     id   : 'apps.file-manager',
+            //     title: 'File Manager',
+            //     type : 'basic',
+            //     icon : 'heroicons_outline:cloud',
+            //     link : '/apps/file-manager'
+            // },
             // {
             //     id      : 'pages.authentication',
             //     title   : 'Authentication',
