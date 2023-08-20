@@ -1,13 +1,13 @@
 import {Component, Injector, OnInit} from '@angular/core';
-import {courses} from "../../../../mock-api/apps/academy/data";
 import {MatDialog} from "@angular/material/dialog";
+import {courses} from "../../../../mock-api/apps/academy/data";
 
 @Component({
-  selector: 'app-courses-list',
-  templateUrl: './courses-list.component.html',
-  styleUrls: ['./courses-list.component.scss']
+  selector: 'app-lesson-list',
+  templateUrl: './lesson-list.component.html',
+  styleUrls: ['./lesson-list.component.scss']
 })
-export class CoursesListComponent implements OnInit {
+export class LessonListComponent implements OnInit {
     filteredCourses: any[] = [];
 
     fileName: string;
@@ -25,6 +25,10 @@ export class CoursesListComponent implements OnInit {
 
     trackByFn(index: number, item: any): any {
         return item.id || index;
+    }
+
+    navigateSlide() {
+        window.open('https://s4.lifesup.com.vn/hrm/file-upload/avatar/6f8e8815-5bde-449a-9d22-5ba4f63c0385.pptx');
     }
 
     openDialogImport(template) {

@@ -1,36 +1,143 @@
 <div class="absolute inset-0 flex flex-col min-w-0 overflow-y-auto" cdkScrollable>
-    <div class="flex flex-col p-6 space-y-6 w-full">
+    <div class="relative flex-0">
         <!-- Header -->
-        <div class="flex">
-            <a class="flex items-center text-primary hover:underline" [routerLink]="['..']">
-                <mat-icon
-                    class="icon-size-5 text-current"
-                    [svgIcon]="'heroicons_solid:arrow-sm-left'"
-                ></mat-icon>
-                <span class="ml-2 font-medium">Back to courses</span>
-            </a>
-
-<!--            <a mat-stroked-button class="text-primary hover:underline" [routerLink]="['..']">-->
-<!--                <span class="inline-flex items-center">-->
-<!--                    <mat-icon-->
-<!--                        class="icon-size-5 text-current"-->
-<!--                        [svgIcon]="'heroicons_solid:arrow-sm-left'"-->
-<!--                    ></mat-icon>-->
-<!--                    <span class="ml-2 font-medium">Back to courses</span>-->
-<!--                </span>-->
-<!--            </a>-->
-        </div>
-
-        <!-- Content -->
-        <div class="bg-card p-4 rounded-md flex flex-col" style="height: calc(100vh - 213px);">
-            <div class="h-full">
-<!--                <iframe src="./assets/images/powerpoint.pdf" width="100%" height="100%"></iframe>-->
-                <ngx-doc-viewer
-                    [url]="doc"
-                    viewer="google"
-                    style="width:100%;height:100%;"
-                ></ngx-doc-viewer>
+        <div class="flex flex-col sm:flex-row items-start sm:items-center sm:justify-between p-6 sm:py-12 md:px-8 border-b bg-card dark:bg-transparent">
+            <!-- Title -->
+            <div>
+                <div class="text-4xl font-extrabold tracking-tight leading-none">File Manager</div>
+                <div class="flex items-center mt-0.5 font-medium text-secondary">
+<!--                    <ng-container *ngIf="!items.path.length">-->
+<!--                        {{items.folders.length}} folders, {{items.files.length}} files-->
+<!--                    </ng-container>-->
+<!--                    &lt;!&ndash; Breadcrumbs &ndash;&gt;-->
+<!--                    <ng-container *ngIf="items.path.length">-->
+<!--                        <div class="flex items-center space-x-2">-->
+<!--                            <a-->
+<!--                                class="text-primary cursor-pointer"-->
+<!--                                [routerLink]="['/apps/file-manager']">Home-->
+<!--                            </a>-->
+<!--                            <div class="">/</div>-->
+<!--                            <ng-container *ngFor="let path of items.path; let last = last; trackBy: trackByFn">-->
+<!--                                <ng-container *ngIf="!last">-->
+<!--                                    <a-->
+<!--                                        class="text-primary cursor-pointer"-->
+<!--                                        [routerLink]="['/apps/file-manager/folders/', path.id]">{{path.name}}</a>-->
+<!--                                </ng-container>-->
+<!--                                <ng-container *ngIf="last">-->
+<!--                                    <div>{{path.name}}</div>-->
+<!--                                </ng-container>-->
+<!--                                <ng-container *ngIf="!last">-->
+<!--                                    <div class="">/</div>-->
+<!--                                </ng-container>-->
+<!--                            </ng-container>-->
+<!--                        </div>-->
+<!--                    </ng-container>-->
+                </div>
+                <a class="flex items-center text-primary hover:underline" [routerLink]="['..']">
+                    <mat-icon
+                        class="icon-size-5 text-current"
+                        [svgIcon]="'heroicons_solid:arrow-sm-left'"
+                    ></mat-icon>
+                    <span class="ml-2 font-medium">Back to course</span>
+                </a>
+            </div>
+            <!-- Actions -->
+            <div class="mt-4 sm:mt-0">
+                <!-- Upload button -->
+                <button
+                    mat-raised-button
+                    [color]="'primary'"
+                    (click)="openDialogImport(import_file)"
+                >
+                    <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
+                    <span class="ml-2 mr-1">Tạo phần học</span>
+                </button>
             </div>
         </div>
     </div>
+
+    <div class="flex flex-col p-6 space-y-6 w-full max-w-xs sm:max-w-5xl mx-auto">
+        <!-- Courses -->
+        <ng-container *ngIf="this.filteredCourses.length; else noCourses">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-8 sm:mt-10">
+                <ng-container *ngFor="let course of filteredCourses; trackBy: trackByFn">
+                    <a mat-stroked-button [routerLink]="['/courses/unit/', course.id]">
+                        <span class="inline-flex items-center">
+                            <span>Continue</span>
+                            <mat-icon
+                                class="ml-1.5 icon-size-5"
+                                [svgIcon]="'heroicons_solid:arrow-sm-right'"></mat-icon>
+                        </span>
+                    </a>
+                </ng-container>
+            </div>
+        </ng-container>
+
+        <!-- No courses -->
+        <ng-template #noCourses>
+            <div class="flex flex-auto flex-col items-center justify-center bg-gray-100 dark:bg-transparent">
+                <mat-icon
+                    class="icon-size-24"
+                    [svgIcon]="'heroicons_outline:document-search'"></mat-icon>
+                <div class="mt-6 text-2xl font-semibold tracking-tight text-secondary">No courses found!</div>
+            </div>
+        </ng-template>
+    </div>
 </div>
+
+<ng-template #import_file>
+    <div class="">
+        <div class="header pb-4 border-b">
+            <span class="text-[20px] font-bold">Import file</span>
+        </div>
+
+        <div class="content my-4">
+            <div class="w-1/2 h-[40px] flex items-center px-3 border mx-auto rounded">
+                <span class="mr-2">
+                  <svg width="24" height="24">
+                    <use xlink:href="#icon_attach_file"></use>
+                  </svg>
+                </span>
+                <ng-container *ngIf="!fileName">
+                    <input type="file" id="acceptanceFile" class="hidden" (change)="uploadFile($event)" #fileUpload />
+                    <input
+                        [ngClass]="{ 'cursor-pointer': true }"
+                        readonly
+                        class="w-full"
+                        [placeholder]="'Choose file'"
+                        matInput
+                        trim="blur"
+                        (click)="fileUpload.click()"
+                    />
+                </ng-container>
+                <ng-container *ngIf="fileName">
+                    <div class="flex item-center space-x-1">
+                        <span class="mr-2">{{ fileName }}</span>
+                        <button class="icon-size-5" mat-icon-button color="primary" (click)="removeFile()">
+                            <mat-icon svgIcon="heroicons_outline:x" title="Close"></mat-icon>
+                        </button>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+
+        <div class="footer mt-4 flex justify-end">
+            <div>
+                <button
+                    class="rounded-[4px] py-2 px-4 mr-3 bg-[#F1F5F9]"
+                    mat-raised-button
+                    (click)="closeDialog()"
+                >
+                    <span>Hủy</span>
+                </button>
+                <button
+                    class="rounded-[4px] py-2 px-4"
+                    mat-raised-button
+                    color="primary"
+                >
+                    <span>Import</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</ng-template>
