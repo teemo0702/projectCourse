@@ -4,6 +4,7 @@ import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {take} from 'rxjs/operators';
 import {MatTable} from "@angular/material/table";
 import {AddOrEditAccountComponent} from "./add-or-edit-account/add-or-edit-account.component";
+import {UserService} from "../../../shared/services/users.service";
 
 @Component({
   selector: 'app-account-management',
@@ -16,78 +17,39 @@ export class AccountManagementComponent implements OnInit {
     listAccounts: IAccount[] = [
         {
             id: 1,
-            fullname: "Trần Minh Đức",
-            username: "19020260"
-        },
-        {
-            id: 2,
-            fullname: "Dương Hữu Huy",
-            username: "19120565"
-        },
-        {
-            id: 3,
-            fullname: "Cao Huy Hiếu",
-            username: "1901634"
-        },
-        {
-            id: 4,
-            fullname: "Trần Minh Đức",
-            username: "19020260"
-        },
-        {
-            id: 5,
-            fullname: "Dương Hữu Huy",
-            username: "19120565"
-        },
-        {
-            id: 6,
-            fullname: "Cao Huy Hiếu",
-            username: "1901634"
-        },
-        {
-            id: 7,
-            fullname: "Trần Minh Đức",
-            username: "19020260"
-        },
-        // {
-        //     id: 2,
-        //     fullname: "Dương Hữu Huy",
-        //     username: "19120565"
-        // },
-        // {
-        //     id: 3,
-        //     fullname: "Cao Huy Hiếu",
-        //     username: "1901634"
-        // },
-        // {
-        //     id: 1,
-        //     fullname: "Trần Minh Đức",
-        //     username: "19020260"
-        // },
-        // {
-        //     id: 2,
-        //     fullname: "Dương Hữu Huy",
-        //     username: "19120565"
-        // },
-        // {
-        //     id: 3,
-        //     fullname: "Cao Huy Hiếu",
-        //     username: "1901634"
-        // },
+            name: 'ABC',
+            userName: 'ABC',
+            email: 'a@gmail.com.vn',
+            role: 'STUDENT'
+        }
     ];
     filteredAccounts: IAccount[] = [];
-    displayedColumns: string[] = ['id', 'fullname', 'username', 'action'];
+    displayedColumns: string[] = ['stt', 'name', 'email', 'userName', 'action'];
     keySearch: string;
 
     public dialogService: MatDialog;
     constructor(
       injector: Injector,
+      public userService: UserService
     ) {
       this.dialogService = injector.get(MatDialog);
     }
 
     ngOnInit(): void {
-      this.filteredAccounts = this.listAccounts;
+        this.filteredAccounts = this.listAccounts;
+        // this.getAllUsers(() => {
+        // });
+    }
+
+    getAllUsers(callback?): void {
+        this.userService.getAllUsers().subscribe(res => {
+            if (res.code === 0) {
+                this.listAccounts = res.data.map(data => ({ ...data, id: data._id }));
+                if (callback) {
+                    callback(this.listAccounts);
+                }
+            }
+        })
     }
 
     trackByFn(index: number, item: any): any {
@@ -95,11 +57,9 @@ export class AccountManagementComponent implements OnInit {
     }
 
     createOrEditAccount(user = {}) {
-        // console.log(user);
         this.showDialog(AddOrEditAccountComponent, {
             data: {
-                ...user,
-                totalAcc: this.listAccounts.length
+                ...user
             },
             width: '60vw',
             disableClose: false
@@ -108,6 +68,9 @@ export class AccountManagementComponent implements OnInit {
                 console.log('create or edit: ', value);
                 this.listAccounts.push(value);
                 this.filteredAccounts = this.listAccounts;
+                // this.getAllUsers(() => {
+                //     this.filteredAccounts = this.listAccounts;
+                // });
                 this.table.renderRows();
             }
         });
@@ -133,7 +96,7 @@ export class AccountManagementComponent implements OnInit {
 
     searchAcc() {
         if (this.keySearch && this.keySearch !== '') {
-            this.filteredAccounts = this.listAccounts.filter(acc => this.formatRemoveVietnameseTones(acc.fullname).includes(this.formatRemoveVietnameseTones(this.keySearch)));
+            this.filteredAccounts = this.listAccounts.filter(acc => this.formatRemoveVietnameseTones(acc.name).includes(this.formatRemoveVietnameseTones(this.keySearch)));
         } else {
             this.filteredAccounts = this.listAccounts;
         }

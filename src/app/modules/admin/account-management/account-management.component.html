@@ -34,7 +34,7 @@
         <table mat-table [dataSource]="filteredAccounts" class="mat-elevation-z8">
 
             <!-- Position Column -->
-            <ng-container matColumnDef="id">
+            <ng-container matColumnDef="stt">
                 <th mat-header-cell *matHeaderCellDef>
                     <span class="text-lg">No.</span>
                 </th>
@@ -42,19 +42,27 @@
             </ng-container>
 
             <!-- Name Column -->
-            <ng-container matColumnDef="fullname">
+            <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef>
                     <span class="text-lg">Full name</span>
                 </th>
-                <td mat-cell *matCellDef="let element"> {{element.fullname}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
             </ng-container>
 
-            <!-- Weight Column -->
-            <ng-container matColumnDef="username">
+            <!-- Username Column -->
+            <ng-container matColumnDef="userName">
                 <th mat-header-cell *matHeaderCellDef>
                     <span class="text-lg">User name</span>
                 </th>
-                <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.userName}} </td>
+            </ng-container>
+
+            <!-- Email Column -->
+            <ng-container matColumnDef="email">
+                <th mat-header-cell *matHeaderCellDef>
+                    <span class="text-lg">Email</span>
+                </th>
+                <td mat-cell *matCellDef="let element"> {{element.email}} </td>
             </ng-container>
 
             <ng-container matColumnDef="action">
@@ -62,7 +70,10 @@
                     <span class="text-lg">Action</span>
                 </th>
                 <td mat-cell *matCellDef="let element">
-                    <span (click)="createOrEditAccount(element)">Edit</span>
+                    <span (click)="createOrEditAccount(element)">
+                        <mat-icon class="icon-size-5 mr-2" [svgIcon]="'heroicons_solid:pencil-alt'"></mat-icon>
+<!--                        Edit-->
+                    </span>
                 </td>
             </ng-container>
 

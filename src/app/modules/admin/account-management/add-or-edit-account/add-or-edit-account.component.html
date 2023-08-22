@@ -3,25 +3,59 @@
         <span class="text-[20px] font-bold">Cấp tài khoản</span>
     </div>
     <div class="content my-4">
-        <div class="pt-4 space-y-6">
-            <mat-form-field class="fuse-mat-no-subscript w-full">
-                <label for="fullname"></label>
-                <input
-                    id="fullname"
-                    [(ngModel)]="fullname"
-                    [placeholder]="'Họ và tên'"
-                    matInput
-                >
-            </mat-form-field>
-            <mat-form-field class="fuse-mat-no-subscript w-full">
-                <label for="username"></label>
-                <input
-                    id="username"
-                    [(ngModel)]="username"
-                    [placeholder]="'Tên tài khoản'"
-                    matInput
-                >
-            </mat-form-field>
+        <div [formGroup]="formGroup" class="pt-4 space-y-6">
+            <div>
+                <label for="name">Họ và tên</label>
+                <mat-form-field class="fuse-mat-no-subscript w-full">
+                    <input
+                        id="name"
+                        formControlName="name"
+                        [placeholder]="'Họ và tên'"
+                        required
+                        matInput
+                    >
+                </mat-form-field>
+            </div>
+
+            <div>
+                <label for="email">Email cá nhân</label>
+                <mat-form-field class="fuse-mat-no-subscript w-full">
+                    <input
+                        id="email"
+                        formControlName="email"
+                        [placeholder]="'Email cá nhân'"
+                        required
+                        matInput
+                    >
+                </mat-form-field>
+            </div>
+
+            <div>
+                <label for="userName">Tên tài khoản</label>
+                <mat-form-field class="fuse-mat-no-subscript w-full">
+                    <input
+                        id="userName"
+                        formControlName="userName"
+                        [placeholder]="'Tên tài khoản'"
+                        required
+                        matInput
+                    >
+                </mat-form-field>
+            </div>
+
+            <div>
+                <label for="role">Quyền truy cập</label>
+                <mat-form-field class="fuse-mat-no-subscript w-full">
+                    <mat-select
+                        id="role"
+                        formControlName="role"
+                        placeholder="Chọn quyền"
+                    >
+                        <mat-option [value]="'TEACHER'">TEACHER</mat-option>
+                        <mat-option [value]="'STUDENT'">STUDENT</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
         </div>
     </div>
     <div class="footer mt-4 flex justify-end">
@@ -37,7 +71,8 @@
                 class="rounded-[4px] py-2 px-4"
                 mat-raised-button
                 color="primary"
-                (click)="saveAccount()"
+                [disabled]="formGroup.invalid"
+                (click)="formGroup.valid && saveAccount(formGroup.value)"
             >
                 <span>Lưu</span>
             </button>

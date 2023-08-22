@@ -7,6 +7,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
 import {MatTooltipModule} from "@angular/material/tooltip";
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
     imports: [
@@ -24,6 +25,7 @@ import {MatTooltipModule} from "@angular/material/tooltip";
         MatInputModule,
         MatButtonModule,
         MatTooltipModule,
+        MatSelectModule,
     ]
 })
 export class SharedModule

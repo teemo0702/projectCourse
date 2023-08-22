@@ -1,5 +1,7 @@
 export interface IAccount {
-    id?: number;
-    fullname?: string;
-    username?: string;
+    id: number;
+    name: string;
+    email: string;
+    userName: string;
+    role: string;
 }

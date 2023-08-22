@@ -16,16 +16,24 @@ export const coursesRoutes: Route[] = [
             },
             {
                 path     : ':id',
-                component: CoursesDetailComponent,
-            },
-            {
-                path     : 'unit/:id',
                 component: LessonListComponent,
             },
             {
-                path     : 'unit/lesson/:id',
+                path     : 'lesson/:id',
                 component: LessonDetailComponent
             }
+            // {
+            //     path     : ':id',
+            //     component: CoursesDetailComponent,
+            // },
+            // {
+            //     path     : 'unit/:id',
+            //     component: LessonListComponent,
+            // },
+            // {
+            //     path     : 'unit/lesson/:id',
+            //     component: LessonDetailComponent
+            // }
         ]
     },
 ];

@@ -1,5 +1,7 @@
 import {Component, Inject, Injector, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {UserService} from "../../../../shared/services/users.service";
 
 @Component({
   selector: 'app-add-or-edit-account',
@@ -7,17 +9,21 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog
   styleUrls: ['./add-or-edit-account.component.scss']
 })
 export class AddOrEditAccountComponent implements OnInit {
-    fullname: string;
-    username: string;
-    countId = 0;
+    formGroup: FormGroup = this.fb.group({
+        id: [null],
+        name: [null, [Validators.required]],
+        email: [null, [Validators.required, Validators.email]],
+        userName: [null, [Validators.required]],
+        role: [null, [Validators.required]],
+    });
 
     constructor(
+        public userService: UserService,
         public dialogRef: MatDialogRef<AddOrEditAccountComponent>,
+        public fb: FormBuilder,
         @Inject(MAT_DIALOG_DATA) public data: any,
     ) {
-        this.fullname = data.fullname ?? null;
-        this.username = data.username ?? null;
-        this.countId = data.totalAcc ?? null;
+        this.formGroup.patchValue({ ...data });
     }
 
     ngOnInit(): void {
@@ -28,18 +34,15 @@ export class AddOrEditAccountComponent implements OnInit {
     }
 
     resetForm() {
-        this.fullname = null;
-        this.username = null;
+        this.formGroup.reset();
     }
 
-    saveAccount() {
-        if (this.fullname && this.fullname !== '' && this.username && this.username !== '') {
-            const data = {
-                id: this.countId + 1,
-                fullname: this.fullname,
-                username: this.username,
-            }
-            this.closeDialog(data);
-        }
+    saveAccount(data) {
+        // this.userService.createUser(data).subscribe(res => {
+        //     if (res.code === 0) {
+        //         this.closeDialog(data);
+        //     }
+        // })
+        this.closeDialog(data);
     }
 }
