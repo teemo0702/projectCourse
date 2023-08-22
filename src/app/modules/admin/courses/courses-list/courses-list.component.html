@@ -79,36 +79,49 @@
 <ng-template #import_file>
     <div class="">
         <div class="header pb-4 border-b">
-            <span class="text-[20px] font-bold">Import file</span>
+            <span class="text-[20px] font-bold">Tạo khóa học</span>
         </div>
 
         <div class="content my-4">
-            <div class="w-1/2 h-[40px] flex items-center px-3 border mx-auto rounded">
-                <span class="mr-2">
-                  <svg width="24" height="24">
-                    <use xlink:href="#icon_attach_file"></use>
-                  </svg>
-                </span>
-                <ng-container *ngIf="!fileName">
-                    <input type="file" id="acceptanceFile" class="hidden" (change)="uploadFile($event)" #fileUpload />
-                    <input
-                        [ngClass]="{ 'cursor-pointer': true }"
-                        readonly
-                        class="w-full"
-                        [placeholder]="'Choose file'"
-                        matInput
-                        trim="blur"
-                        (click)="fileUpload.click()"
-                    />
-                </ng-container>
-                <ng-container *ngIf="fileName">
-                    <div class="flex item-center space-x-1">
-                        <span class="mr-2">{{ fileName }}</span>
-                        <button class="icon-size-5" mat-icon-button color="primary" (click)="removeFile()">
-                            <mat-icon svgIcon="heroicons_outline:x" title="Close"></mat-icon>
-                        </button>
-                    </div>
-                </ng-container>
+            <div [formGroup]="formGroup" class="pt-4 space-y-6">
+                <div>
+                    <label for="name">Tên khóa học</label>
+                    <mat-form-field class="fuse-mat-no-subscript w-full">
+                        <input
+                            id="name"
+                            formControlName="name"
+                            [placeholder]="'Tên khóa học'"
+                            required
+                            matInput
+                        >
+                    </mat-form-field>
+                </div>
+
+                <div>
+                    <label for="code">Mã khóa học</label>
+                    <mat-form-field class="fuse-mat-no-subscript w-full">
+                        <input
+                            id="code"
+                            formControlName="code"
+                            [placeholder]="'Mã khóa học'"
+                            required
+                            matInput
+                        >
+                    </mat-form-field>
+                </div>
+
+                <div>
+                    <label for="desc">Mô tả</label>
+                    <mat-form-field class="fuse-mat-no-subscript w-full">
+                        <input
+                            id="desc"
+                            formControlName="desc"
+                            [placeholder]="'Mô tả'"
+                            required
+                            matInput
+                        >
+                    </mat-form-field>
+                </div>
             </div>
         </div>
 
@@ -125,8 +138,10 @@
                     class="rounded-[4px] py-2 px-4"
                     mat-raised-button
                     color="primary"
+                    [disabled]="formGroup.invalid"
+                    (click)="formGroup.valid && createCourse(formGroup.value)"
                 >
-                    <span>Import</span>
+                    <span>Tạo mới</span>
                 </button>
             </div>
         </div>

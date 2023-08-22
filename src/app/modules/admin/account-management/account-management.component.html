@@ -71,8 +71,11 @@
                 </th>
                 <td mat-cell *matCellDef="let element">
                     <span (click)="createOrEditAccount(element)">
-                        <mat-icon class="icon-size-5 mr-2" [svgIcon]="'heroicons_solid:pencil-alt'"></mat-icon>
-<!--                        Edit-->
+                        <mat-icon
+                            class="icon-size-5"
+                            [svgIcon]="'heroicons_solid:pencil-alt'"
+                            [style.color]="'orange'"
+                        ></mat-icon>
                     </span>
                 </td>
             </ng-container>
