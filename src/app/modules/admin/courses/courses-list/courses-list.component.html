@@ -24,7 +24,12 @@
                     class="icon-size-5"
                     [svgIcon]="'heroicons_solid:search'"
                 ></mat-icon>
-                <input placeholder="Search by name course" matInput>
+                <input
+                    [(ngModel)]="keySearch"
+                    (ngModelChange)="searchCourse()"
+                    placeholder="Search by name course"
+                    matInput
+                >
             </mat-form-field>
             <button
                 mat-raised-button
@@ -56,7 +61,7 @@
                                 <span>Khóa học</span>
                             </div>
                             <div class="flex flex-col flex-auto justify-center text-center text-sm font-medium">
-                                <div class="truncate" [matTooltip]="course.title">{{course.title}}</div>
+                                <div class="truncate" [matTooltip]="course.name">{{course.name}}</div>
                             </div>
                         </a>
                     </div>

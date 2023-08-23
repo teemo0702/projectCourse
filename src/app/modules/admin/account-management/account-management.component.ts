@@ -15,13 +15,13 @@ export class AccountManagementComponent implements OnInit {
     @ViewChild(MatTable) table: MatTable<any>;
 
     listAccounts: IAccount[] = [
-        {
-            id: 1,
-            name: 'ABC',
-            userName: 'ABC',
-            email: 'a@gmail.com.vn',
-            role: 'STUDENT'
-        }
+        // {
+        //     id: 1,
+        //     name: 'ABC',
+        //     userName: 'ABC',
+        //     email: 'a@gmail.com.vn',
+        //     role: 'STUDENT'
+        // }
     ];
     filteredAccounts: IAccount[] = [];
     displayedColumns: string[] = ['stt', 'name', 'email', 'userName', 'action'];
@@ -36,15 +36,15 @@ export class AccountManagementComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.filteredAccounts = this.listAccounts;
-        // this.getAllUsers(() => {
-        // });
+        this.getAllUsers(() => {
+            this.filteredAccounts = this.listAccounts;
+        });
     }
 
     getAllUsers(callback?): void {
         this.userService.getAllUsers().subscribe(res => {
-            if (res.code === 0) {
-                this.listAccounts = res.data.map(data => ({ ...data, id: data._id }));
+            if (res.body.code === 0) {
+                this.listAccounts = res.body.response.map(data => ({ ...data, id: data._id }));
                 if (callback) {
                     callback(this.listAccounts);
                 }
@@ -65,12 +65,12 @@ export class AccountManagementComponent implements OnInit {
             disableClose: false
         }, (value) => {
             if (value) {
-                console.log('create or edit: ', value);
-                this.listAccounts.push(value);
-                this.filteredAccounts = this.listAccounts;
-                // this.getAllUsers(() => {
-                //     this.filteredAccounts = this.listAccounts;
-                // });
+                // console.log('create or edit: ', value);
+                // this.listAccounts.push(value);
+                // this.filteredAccounts = this.listAccounts;
+                this.getAllUsers(() => {
+                    this.filteredAccounts = this.listAccounts;
+                });
                 this.table.renderRows();
             }
         });

@@ -8,6 +8,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatSelectModule} from "@angular/material/select";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 @NgModule({
     imports: [
@@ -26,6 +27,7 @@ import {MatSelectModule} from "@angular/material/select";
         MatButtonModule,
         MatTooltipModule,
         MatSelectModule,
+        MatSnackBarModule,
     ]
 })
 export class SharedModule

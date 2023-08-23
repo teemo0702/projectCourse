@@ -5,3 +5,10 @@ export interface IAccount {
     userName: string;
     role: string;
 }
+
+export interface ICourse {
+    id: number;
+    name: string;
+    code: string;
+    desc: string;
+}

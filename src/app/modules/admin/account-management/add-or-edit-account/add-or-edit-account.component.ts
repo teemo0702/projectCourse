@@ -1,7 +1,8 @@
-import {Component, Inject, Injector, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {Component, Inject, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {UserService} from "../../../../shared/services/users.service";
+import {MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-add-or-edit-account',
@@ -19,6 +20,7 @@ export class AddOrEditAccountComponent implements OnInit {
 
     constructor(
         public userService: UserService,
+        public snackBar: MatSnackBar,
         public dialogRef: MatDialogRef<AddOrEditAccountComponent>,
         public fb: FormBuilder,
         @Inject(MAT_DIALOG_DATA) public data: any,
@@ -38,11 +40,29 @@ export class AddOrEditAccountComponent implements OnInit {
     }
 
     saveAccount(data) {
-        // this.userService.createUser(data).subscribe(res => {
-        //     if (res.code === 0) {
-        //         this.closeDialog(data);
-        //     }
-        // })
-        this.closeDialog(data);
+        this.userService.createUser(data).subscribe(res => {
+            if (res.body.code === 0) {
+                this.snackBar.open(res.body.message, null, this.configSnackBar('success'));
+                this.closeDialog(data);
+            } else {
+                this.snackBar.open(res.body.message, null, this.configSnackBar('error'));
+            }
+        })
+    }
+
+    configSnackBar(type: string) {
+        const horizontalPosition: MatSnackBarHorizontalPosition = 'end';
+        const verticalPosition: MatSnackBarVerticalPosition = 'top';
+        return {
+            panelClass:
+                type === 'success'
+                    ? 'bg-lime-500'
+                    : type === 'warning'
+                        ? 'bg-yellow-500'
+                        : 'bg-red-500',
+            horizontalPosition: horizontalPosition,
+            verticalPosition: verticalPosition,
+            duration: 2000
+        }
     }
 }
