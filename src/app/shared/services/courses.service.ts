@@ -18,11 +18,11 @@ export class CoursesService {
         return this.http.get<any>(`${environment.apiUrl}/courses`, {observe: 'response'});
     }
 
-    createLecture(data): Observable<any> {
+    createLecture(data: FormData): Observable<any> {
         return this.http.post(`${environment.apiUrl}/lectures`, data, {observe: 'response'})
     }
 
-    getAllLectures(): Observable<any> {
-        return this.http.get<any>(`${environment.apiUrl}/lectures`, {observe: 'response'});
+    getAllLectures(courseId): Observable<any> {
+        return this.http.get<any>(`${environment.apiUrl}/lectures/${courseId}`, {observe: 'response'});
     }
 }

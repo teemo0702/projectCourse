@@ -26,6 +26,7 @@ export class AccountManagementComponent implements OnInit {
     filteredAccounts: IAccount[] = [];
     displayedColumns: string[] = ['stt', 'name', 'email', 'userName', 'action'];
     keySearch: string;
+    isAdmin = false;
 
     public dialogService: MatDialog;
     constructor(
@@ -36,6 +37,7 @@ export class AccountManagementComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.isAdmin = localStorage.getItem('roleUser') === 'ADMIN';
         this.getAllUsers(() => {
             this.filteredAccounts = this.listAccounts;
         });

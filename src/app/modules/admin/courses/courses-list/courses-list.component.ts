@@ -34,6 +34,7 @@ export class CoursesListComponent implements OnInit {
         code: [null, [Validators.required]],
         desc: [null, [Validators.required]],
     });
+    isAdmin: string;
 
     public dialogService: MatDialog;
     public snackBar: MatSnackBar;
@@ -47,6 +48,7 @@ export class CoursesListComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.isAdmin = localStorage.getItem('roleUser');
         this.getAllCourses(() => {
             this.filteredCourses = this.listCourses;
         });

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { catchError, Observable, of, switchMap, throwError } from 'rxjs';
 import { AuthUtils } from 'app/core/auth/auth.utils';
 import { UserService } from 'app/core/user/user.service';
+import {environment} from "../../../environments/environment";
 
 @Injectable()
 export class AuthService
@@ -31,9 +32,19 @@ export class AuthService
         localStorage.setItem('accessToken', token);
     }
 
+    set roleUser(role: string)
+    {
+        localStorage.setItem('roleUser', role);
+    }
+
     get accessToken(): string
     {
         return localStorage.getItem('accessToken') ?? '';
+    }
+
+    get roleUser(): any
+    {
+        return localStorage.getItem('roleUser') ?? null;
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -65,7 +76,7 @@ export class AuthService
      *
      * @param credentials
      */
-    signIn(credentials: { email: string; password: string }): Observable<any>
+    signIn(credentials: { userName: string; password: string }): Observable<any>
     {
         // Throw error, if the user is already logged in
         if ( this._authenticated )
@@ -73,11 +84,12 @@ export class AuthService
             return throwError('User is already logged in.');
         }
 
-        return this._httpClient.post('api/auth/sign-in', credentials).pipe(
+        return this._httpClient.post(`${environment.apiUrl}/auth`, credentials).pipe(
             switchMap((response: any) => {
 
                 // Store the access token in the local storage
-                this.accessToken = response.accessToken;
+                this.accessToken = response.data.accessToken;
+                this.roleUser = response.data.role;
 
                 // Set the authenticated flag to true
                 this._authenticated = true;
@@ -138,6 +150,7 @@ export class AuthService
     {
         // Remove the access token from the local storage
         localStorage.removeItem('accessToken');
+        localStorage.removeItem('roleUser');
 
         // Set the authenticated flag to false
         this._authenticated = false;
