@@ -4,6 +4,7 @@ import {courses} from "../../../../mock-api/apps/academy/data";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {CoursesService} from "../../../../shared/services/courses.service";
 import {Router} from "@angular/router";
+import {MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-lesson-list',
@@ -12,6 +13,7 @@ import {Router} from "@angular/router";
 })
 export class LessonListComponent implements OnInit {
     listLectures: any[] = [];
+    courseDetail: any;
     filteredLectures: any[] = [];
 
     fileName: string;
@@ -27,6 +29,7 @@ export class LessonListComponent implements OnInit {
     courseId: string;
 
     public dialogService: MatDialog;
+    public snackBar: MatSnackBar;
     constructor(
         injector: Injector,
         public fb: FormBuilder,
@@ -34,12 +37,18 @@ export class LessonListComponent implements OnInit {
         public router: Router
     ) {
         this.dialogService = injector.get(MatDialog);
+        this.snackBar = injector.get(MatSnackBar);
     }
 
     ngOnInit(): void {
         this.courseId = this.router.url.split('/') ? this.router.url.split('/')[2] : '';
         this.isAdmin = localStorage.getItem('roleUser');
         this.getAllLectures(this.courseId);
+        this.coursesService.getCourseDetail(this.courseId).subscribe(res => {
+            if (res.body.code === 0) {
+                this.courseDetail = res.body.response;
+            }
+        })
     }
 
     getAllLectures(courseId, callback?) {
@@ -97,8 +106,28 @@ export class LessonListComponent implements OnInit {
         formData.append('courseId', this.courseId);
         this.coursesService.createLecture(formData).subscribe(res => {
             if (res.body.code === 0) {
-                console.log('success');
+                this.closeDialog();
+                this.snackBar.open(res.body.message, null, this.configSnackBar('success'));
+                this.getAllLectures(this.courseId);
+            } else {
+                this.snackBar.open(res.body.message, null, this.configSnackBar('error'));
             }
         })
+    }
+
+    configSnackBar(type: string) {
+        const horizontalPosition: MatSnackBarHorizontalPosition = 'end';
+        const verticalPosition: MatSnackBarVerticalPosition = 'top';
+        return {
+            panelClass:
+                type === 'success'
+                    ? 'bg-lime-500'
+                    : type === 'warning'
+                        ? 'bg-yellow-500'
+                        : 'bg-red-500',
+            horizontalPosition: horizontalPosition,
+            verticalPosition: verticalPosition,
+            duration: 2000
+        }
     }
 }

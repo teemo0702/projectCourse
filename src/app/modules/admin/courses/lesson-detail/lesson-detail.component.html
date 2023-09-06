@@ -1,7 +1,7 @@
 <div class="absolute inset-0 flex flex-col min-w-0 overflow-y-auto" cdkScrollable>
     <div class="flex flex-col p-6 space-y-6 w-full">
         <!-- Header -->
-        <div class="flex">
+        <div class="space-y-2">
             <a class="flex items-center text-primary hover:underline" [routerLink]="['..']">
                 <mat-icon
                     class="icon-size-5 text-current"
@@ -9,6 +9,8 @@
                 ></mat-icon>
                 <span class="ml-2 font-medium">Back to lesson</span>
             </a>
+            <div class="text-3xl font-extrabold tracking-tight leading-none">{{ lectureDetail.name }}</div>
+            <div class="tracking-tight leading-none">{{ lectureDetail.desc }}</div>
 
             <!--            <a mat-stroked-button class="text-primary hover:underline" [routerLink]="['..']">-->
             <!--                <span class="inline-flex items-center">-->
@@ -24,7 +26,12 @@
         <!-- Content -->
         <div class="bg-card p-4 rounded-md flex flex-col" style="height: calc(100vh - 213px);">
             <div class="h-full">
-                                <iframe src="./assets/images/powerpoint.pdf" width="100%" height="100%"></iframe>
+                <ng-container *ngIf="doc.includes('pdf')">
+                    <iframe [src]="sanitizeURL(doc)" width="100%" height="100%"></iframe>
+                </ng-container>
+                <ng-container *ngIf="!doc.includes('pdf')">
+                    <iframe src="./assets/images/powerpoint.pdf" width="100%" height="100%"></iframe>
+                </ng-container>
 <!--                <ngx-doc-viewer-->
 <!--                    [url]="doc"-->
 <!--                    viewer="google"-->

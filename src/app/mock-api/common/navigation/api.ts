@@ -69,16 +69,57 @@ export class NavigationMockApi
                     });
                 });
 
+                const role = localStorage.getItem('roleUser') ?? null;
+                const menu = cloneDeep(this._defaultNavigation);
+                let menuNew: any[];
+                if (role !== 'ADMIN') {
+                    menuNew = this.loadUserNavigation(menu);
+                } else {
+                    menuNew = this._defaultNavigation;
+                }
+
                 // Return the response
                 return [
                     200,
                     {
                         compact   : cloneDeep(this._compactNavigation),
-                        default   : cloneDeep(this._defaultNavigation),
+                        default   : cloneDeep(menuNew),
                         futuristic: cloneDeep(this._futuristicNavigation),
                         horizontal: cloneDeep(this._horizontalNavigation)
                     }
                 ];
             });
+    }
+
+    loadUserNavigation(listMenu: any): any[] {
+        listMenu.forEach(menu => {
+            if (menu.id === 'dashboards') {
+                menu.children.splice(1, 1);
+            }
+        })
+        let arrInfo = {
+            id: 'hrmManagement',
+            title: 'hrm-info.title',
+            type: 'group',
+            icon: 'heroicons_outline:home',
+            link: '/hrm-info',
+            children: [
+                {
+                    id: 'profile',
+                    title: 'profile.title',
+                    type: 'basic',
+                    icon: 'heroicons_outline:user',
+                    link: '/hrm-info/profile-management',
+                },
+                {
+                    id: 'diagram',
+                    title: 'hrm-management.diagram.title',
+                    type: 'basic',
+                    icon: 'heroicons_outline:icon_diagram',
+                    link: '/hrm-info/diagram-management',
+                },
+            ],
+        }
+        return listMenu;
     }
 }

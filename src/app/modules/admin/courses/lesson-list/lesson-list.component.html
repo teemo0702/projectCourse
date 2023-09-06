@@ -4,7 +4,6 @@
         <div class="flex flex-col sm:flex-row items-start sm:items-center sm:justify-between p-6 sm:py-12 md:px-8 border-b bg-card dark:bg-transparent">
             <!-- Title -->
             <div class="space-y-2">
-                <div class="text-4xl font-extrabold tracking-tight leading-none">Courses Manager</div>
                 <a class="flex items-center text-primary hover:underline" [routerLink]="['..']">
                     <mat-icon
                         class="icon-size-5 text-current"
@@ -12,6 +11,8 @@
                     ></mat-icon>
                     <span class="ml-2 font-medium">Back to course</span>
                 </a>
+                <div class="text-4xl font-extrabold tracking-tight leading-none">{{ courseDetail.name }} - {{ courseDetail.code }}</div>
+                <div class="tracking-tight leading-none">{{ courseDetail.desc }}</div>
             </div>
             <!-- Actions -->
             <div class="mt-4 sm:mt-0">
