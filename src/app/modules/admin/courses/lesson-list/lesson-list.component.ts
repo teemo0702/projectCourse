@@ -89,5 +89,16 @@ export class LessonListComponent implements OnInit {
     createLecture(data) {
         console.log(data);
         console.log(this.courseId);
+        const formData = new FormData();
+        formData.append('file', data.file || null);
+        formData.append('name', data.name);
+        formData.append('code', data.code);
+        formData.append('desc', data.desc);
+        formData.append('courseId', this.courseId);
+        this.coursesService.createLecture(formData).subscribe(res => {
+            if (res.body.code === 0) {
+                console.log('success');
+            }
+        })
     }
 }
