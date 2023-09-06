@@ -70,6 +70,7 @@ export class CoursesListComponent implements OnInit {
     }
 
     openDialogImport(template) {
+        this.formGroup.reset();
         this.dialogService.open(template, {panelClass: 'custom-dialog'});
     }
 

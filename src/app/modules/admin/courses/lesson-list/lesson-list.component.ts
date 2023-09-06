@@ -71,6 +71,7 @@ export class LessonListComponent implements OnInit {
     // }
 
     openDialogImport(template) {
+        this.formGroup.reset();
         this.fileName = null;
         this.dialogService.open(template, {panelClass: 'custom-dialog'});
     }
